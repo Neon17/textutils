@@ -1,29 +1,53 @@
 import React, {useState} from 'react'
 
 export default function Accordian(props){
-    let [text,setText] = useState('Switch to Dark Mode');
+    // let myStyle = {
+    //     color: (props.toggleMode==='dark')?'white':'black',
+    //     backgroundColor: props.toggleMode,
+    // }
     let [myStyle, setMyStyle] = useState({
-        color: 'black',
-        backgroundColor: 'white',
+        backgroundColor: (props.toggleMode==='dark')?'black':'white',
+        color: (props.toggleMode==='light')?'black':'white'
     })
-    const switchMode = ()=>{
-        if (myStyle.color === 'black'){
-            setMyStyle({
-                color : 'white',
-                backgroundColor : 'black',
-                border : '1px solid white',
-            })
-            setText('Switch to Light Mode');
-        }
-        else {
-            setMyStyle({
-                color : 'black',
-                backgroundColor : 'white',
-                border : ''
-            })
-            setText('Switch to Dark Mode')
-        }
+
+    
+    // let [text,setText] = useState((props.toggleMode==='light')?'Switch to Dark Mode':'Switch to Light Mode');
+    
+    // const switchMode = ()=>{
+    //     if (myStyle.color === 'black'){
+    //         // myStyle.color = 'white';
+    //         // myStyle.backgroundColor = 'black';
+    //         // myStyle.border = '1px solid white';
+    //         setMyStyle({
+    //             color : 'white',
+    //             backgroundColor : 'black',
+    //             border : '1px solid white',
+    //         })
+    //         setText('Switch to Light Mode');
+    //     }
+    //     else {
+    //         // myStyle.color = 'black';
+    //         // myStyle.backgroundColor = 'white';
+    //         // myStyle.border = '';
+    //         setMyStyle({
+    //             color : 'black',
+    //             backgroundColor : 'white',
+    //             border : ''
+    //         })
+    //         setText('Switch to Dark Mode')
+    //     }
+    // }
+
+    const initializeMode = ()=>{
+        setMyStyle({
+            backgroundColor: (props.toggleMode==='dark')?'black':'white',
+            color: (props.toggleMode==='light')?'black':'white'
+        })
     }
+
+    setTimeout(initializeMode,0);
+
+
     return (
         <div className='mx-auto' style={{width: '1000px'}}>
             <div className="accordion" id="accordionExample">
@@ -64,7 +88,7 @@ export default function Accordian(props){
                     </div>
                 </div>
             </div>
-            <button type="button" className="btn btn-primary mt-2" onClick={switchMode}  data-bs-toggle="button" aria-pressed="false" autoComplete="off">{text}</button>
+            {/* <button type="button" className="btn btn-primary mt-2" onClick={switchMode}  data-bs-toggle="button" aria-pressed="false" autoComplete="off">{text}</button> */}
             
         </div>
     );
