@@ -1,33 +1,16 @@
 import {PropTypes} from 'prop-types';
-import {useState} from 'react';
-import Alert from './Alert';
 
 function Navbar(props) {
-  // const [text,setText] = useState('Switch to Dark Mode');
-  // const [msg,setMsg] = useState(null);
-  const [alert,setAlert] = useState(null);
   
   const handleChange = ()=>{
     if (props.toggleMode==='dark'){
       props.setMode('light');
-      // Below code doesn't work and needs to be debugged
-      // props.showAlert('Switched to Light Mode!','Success');
-      setAlert({
-        msg: 'Switched to Light Mode!',
-        type: 'Success'
-      })
+      props.showAlert('Switched to Light Mode!','success');
     }
     else{
       props.setMode('dark');
-      // props.showAlert('Switched to Dark Mode!','Success');
-      setAlert({
-        msg: 'Switched to Dark Mode!',
-        type: 'Success'
-      })
+      props.showAlert('Switched to Dark Mode!','success');
     }
-    setTimeout(() => {
-      setAlert(null);
-    }, 2000);
   }
 
   return (
@@ -70,7 +53,6 @@ function Navbar(props) {
         </div>
       </div>
     </nav>
-    <Alert alert = {alert}/>
     </>
   );
 }

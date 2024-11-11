@@ -9,8 +9,15 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
 function App() {
   const [mode,setMode] = useState('light')
-  const showAlert = function (msg,type){
-    <Alert msg = {msg} type = {type}/>
+  const [alert,setAlert] = useState(null);
+
+  let showAlert = (msg,type)=>{
+    if (msg && type){
+      setAlert({
+        msg: msg,
+        type: type
+      })
+    }
   }
 
   const router = createBrowserRouter([
@@ -33,11 +40,16 @@ function App() {
     document.title = "You are mad";
   },2000)
 
+  setTimeout(() => {
+    setAlert(null);
+  }, 2500);
+
   return (
     <>
     <div className = {`pb-2 bg-${(mode==='light')?'white':'#000090'} text-${(mode==='light')?'dark':'light'}`} style={{backgroundColor: (mode==='dark')?'#042743':'light',height: '100vh'}}>
       <Navbar title='Matrix' toggleMode = {mode} setMode = {setMode} showAlert = {showAlert}/>
-      <RouterProvider router = {router}/>
+      <Alert alert = {alert}/>
+      <RouterProvider router = {router} future={{ v7_startTransition: true }}/>
     </div>
     </>
   );
